@@ -27,10 +27,11 @@ ActiveRecord::Schema.define(:version => 20160130123127) do
   add_index "bugger_job_results", ["state"], :name => "index_bugger_job_results_on_state"
 
   create_table "bugger_jobs", :force => true do |t|
-    t.string   "state",        :null => false
+    t.string   "state",          :null => false
+    t.integer  "delayed_job_id"
     t.datetime "completed_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "bugger_jobs", ["state"], :name => "index_bugger_jobs_on_state"
