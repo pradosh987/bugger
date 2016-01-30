@@ -6,6 +6,7 @@ class BuggerSetup < ActiveRecord::Migration
 
       create_table :bugger_jobs do |t|
         t.string :state, :null => false
+        t.datetime :completed_at 
         t.timestamps
       end
       add_index :bugger_jobs, :state
