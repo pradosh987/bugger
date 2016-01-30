@@ -35,3 +35,7 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'delayed_job_active_record'
+gem 'paperclip'
+gem 'activerecord-postgres-hstore', :git => 'https://github.com/vacationlabs/activerecord-postgres-hstore.git'

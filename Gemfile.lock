@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/vacationlabs/activerecord-postgres-hstore.git
+  revision: 0360d3cd7f0d93accddc7e9cad123c52e523e414
+  specs:
+    activerecord-postgres-hstore (0.7.7)
+      activerecord (>= 3.1)
+      pg-hstore (>= 1.1.5)
+      rake
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,6 +39,10 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.3)
     builder (3.0.4)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -37,6 +50,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    delayed_job (4.1.1)
+      activesupport (>= 3.0, < 5.0)
+    delayed_job_active_record (4.1.0)
+      activerecord (>= 3.0, < 5)
+      delayed_job (>= 3.0, < 5)
     erubis (2.7.0)
     execjs (2.6.0)
     hike (1.2.3)
@@ -50,8 +68,16 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
+    mimemagic (0.3.0)
     multi_json (1.11.2)
+    paperclip (4.3.3)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
+      mimemagic (= 0.3.0)
     pg (0.18.4)
+    pg-hstore (1.2.0)
     polyglot (0.3.5)
     rack (1.4.7)
     rack-cache (1.6.0)
@@ -102,8 +128,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgres-hstore!
   coffee-rails (~> 3.2.1)
+  delayed_job_active_record
   jquery-rails
+  paperclip
   pg
   rails (= 3.2.21)
   sass-rails (~> 3.2.3)
