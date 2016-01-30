@@ -11,5 +11,17 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery_ujs
+// require jquery_ujs
+
+//= require angular.min
+//= require angular-animate.min
+//= require angular-cookies.min
+//= require angular-loader.min
+//= require angular-resource.min
+//= require angular-route.min
+//= require angular-route.min.js
+//= require angular-sanitize.min
+//= require angular-touch.min
+//= require bootstrap.js
+
 //= require_tree .
