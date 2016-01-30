@@ -1,0 +1,31 @@
+<div ng-controller="interfaceController">
+  <div class="bugger-content">
+    
+    <h1 class="creative-heading">hELLO wORLD!</h1>
+
+    <section class="content-box input-container">
+      <div class="content">
+        <p>Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. </p>
+
+        <form name="bugger-file-uploader" class="bugger-file-uploader">
+          <fieldset class="form-group bugger-form-group">
+            <input type="file" class="form-control-file bubber-file" id="exampleInputFile">
+          </fieldset>
+          <button type="submit" class="bugger-button bugger-upload-button">Submit</button>
+        </form>
+
+        <p>Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. Some dummy content here. </p>
+
+      </div>
+    </section>
+
+    <section ng-if="is_processing" class="bugger-progress">
+      <div class="content">
+        <p>We are processing your request in background, please wait!!!</p>
+        <progress class="progress progress-striped progress-animated" value="{{bugger_job_progress}}" max="{{bugger_job_count}}">{{bugger_job_progress}}%</progress>
+        <div class="progress-overview"><span class="counter">{{bugger_job_progress}}</span> processed out of <span class="counter">{{bugger_job_count}}</span></div>
+      </div>
+    </section>
+
+  </div>
+</div>

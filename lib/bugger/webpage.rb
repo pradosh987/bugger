@@ -11,7 +11,7 @@ module Bugger
     # doc.find(".productSpecs")
     def find(klass)
       return false if @data.blank?
-      @data.find( 
+      @data.css( 
         klass)
     end
 

@@ -1,0 +1,95 @@
+// Place all the styles related to the Interface controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@import "variable_overrides";
+@import "bootstrap";
+
+/*  ------- HEADER --------  */
+
+header, footer {
+  height: 200px;
+}
+
+/*  ------- HEADER --------  */
+
+
+.bugger-content {
+  @extend .container;
+
+  .creative-heading {
+    margin: 20px;
+    padding: 10px;
+  }
+
+  .input-container {
+    @extend .bugger-container;
+    
+    padding: 20px 60px;
+    border: 3px solid rgba(167, 248, 159, 0.3);
+
+    p {
+      text-align: center;
+      margin: 20px 0px;
+      margin-bottom: 50px;
+    }
+
+    .bugger-file-uploader {
+      text-align: center;
+    }
+  }
+
+  .bugger-progress {
+    @extend .bugger-container;
+    
+    .content {
+      margin: 50px 0px;
+
+      p, .progress-overview {
+        font-size: 25px;
+        text-align: center
+      }
+
+      .counter {
+        text-decoration: underline;
+      }
+    }
+  
+  }
+
+}
+
+
+
+section {
+  @extend .container;
+}
+
+/*  --------- Forms  --------------- */
+
+.bugger-form-group {
+  display: inline-block;
+}
+
+/*  --------- Forms  --------------- */
+
+/*  --------- UTILITY CLASES  --------------- */
+
+.creative-heading {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.bugger-button {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.bugger-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/*  --------- UTILITY CLASES  --------------- */
