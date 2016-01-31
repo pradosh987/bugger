@@ -1,8 +1,4 @@
 <div ng-controller="resultController">
-  <div class="preloader"></div>
-
-  
-
   <header id="top" class="header">
       <div class="container">
 
@@ -13,54 +9,54 @@
           </div> -->
 
           <h1 class="headline-support wow fadeInDown">Bugger</h1>
-          <h2 class="headline wow fadeInDown" data-wow-delay="0.1s">Please wait! processing {{bugger_job_progress}} out of {{bugger_job_count}}</h2>
+          <h2 class="headline wow fadeInDown" data-wow-delay="0.1s">Please wait! processing job no. {{results.length}}</h2>
 
-          <div class="poll_result">
-            
+          <div class="poll_result" ng-if="all_passed">
+            <i class="glyphicon glyphicon-ok-circle"></i>
+            <p>Hurry! All is well</p>
           </div>
 
-          <!-- <div class="when_where wow fadeIn" data-wow-delay="0.4s">
-              <p class="event_when">August 21st - 22nd 2016</p>
-              <p class="event_where">Stockholm, Sweden</p>
-          </div> -->
+          <div class="poll_result" ng-if="not_all_passed">
+            <i class="glyphicon glyphicon-remove-circle"></i>
+            <p>Something went crazy</p>
+          </div>
           <div class="bugger-progress" ng-if="is_processing">
              <i class="fa fa-spinner fa-spin"></i>
           </div>
       </div>
-      <!-- end .container -->
   </header>
-  <!-- end .header -->
 
   <div class="highlight result-container" ng-repeat="item in results">
-      <div class="container">
+      <div class="container {{item.status}}">
 
           <div class="row">
               <div class="col-sm-12">
                   <div class="contact-box bugger-result">
-                      <div class="result" ng-click="toggle-errors()" >
+                      <div class="result"  >
                         <div class="overview">
                           <div class="preview-image">
-                            <img src="http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg" class="img-thumbnail">
+                            <img src="{{item.product_image_url || 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150' }}" class="img-thumbnail">
                           </div>
                           
                           <div class="title">
-                            <p>{{item.title}}</p>
-                            <small>{{item.sku_id}}</small>
+                            <h3><a href="{{item.product_page_url}}">{{item.product_title}}</a></h3>
+                            <small>{{item.product_ref}}</small>
                           </div>
 
                           <div class="status">
-                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" ng-if="item.passed"></span>
-                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" ng-if="!item.passed"></span>
+                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" ng-if="!item.errors || item.errors.length == 0"></span>
+                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" ng-if="item.errors && item.errors.length > 0"></span>
                           </div>
                         </div>
                       </div>
-                      <div class="bugger-errors" ng-if="!item.passed" id="{$index}">
+                      <div class="bugger-errors" ng-if="item.errors && item.errors.length > 0" id="{$index}">
                         <div class="bs-example">
                           <table class="table table-hover"> 
                             <thead> 
                               <tr> 
                                 <th>#</th>
-                                <th>Field</th> 
+                                <th>Field</th>
+                                <th>Type</th> 
                                 <th>Expected</th> 
                                 <th>Actual</th>
                               </tr> 
@@ -69,9 +65,10 @@
                             <tbody ng-repeat="error in item.errors"> 
                               <tr> 
                                 <th scope="row">1</th> 
-                                <td>{{error.field}}</td> 
-                                <td>{{error.expected}}</td> 
-                                <td>{{error.actual}}</td> 
+                                <td>{{error.key}}</td> 
+                                <td>{{error.type}}</td colspan="{{(error.expected_value ? 3 : 2)}}"> 
+                                <td>{{error.expected_value}}</td ng-if="error.expected_value"> 
+                                <td>{{error.actual_value}}</td ng-if="error.actual_value"> 
                               </tr>  
                             </tbody> 
                           </table>
@@ -81,17 +78,7 @@
               </div>
               
           </div>
-          <!--  // end .row -->
       </div>
   </div>
-  <!-- //  end .highlight -->
-
-  <!-- 
-   Footer Call to Action
-   ====================================== -->
-
-  <footer>
-      <!-- <p> <small class="text-muted">Copyright © 2015. All rights reserved. Made in India</small></p> -->
-
-  </footer>
+  <input type="hidden" name="bugger_job_id" id="bugger_job_id" value="<%= @dj.id %>">
 </div>
