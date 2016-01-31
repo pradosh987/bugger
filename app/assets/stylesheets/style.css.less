@@ -5,11 +5,13 @@
 
 @import "twitter/bootstrap";
 @import "variable_overrides";
+@import "event";
+@import "mint";
 
 /*  ------- HEADER --------  */
 
 header, footer {
-  height: 200px;
+  height: 500px;
 }
 
 .above-the-fold {
@@ -17,6 +19,9 @@ header, footer {
 }
 
 /*  ------- HEADER --------  */
+
+
+
 
 
 .bugger-content {
@@ -62,7 +67,16 @@ header, footer {
   
   }
 
-  .bugger-result {
+  
+
+}
+
+
+.result-container {
+  padding: 0px 0px;
+}
+
+.bugger-result {
     .container;
 
 
@@ -72,12 +86,12 @@ header, footer {
       .overview {
         .row;
         padding: 5px;
-        border: 3px solid #dddddd;
-        border-radius: 5px;
-
+        // border: 3px solid #dddddd;
+        // border-radius: 5px;
+        overflow: hidden;
         .preview-image {
           .make-sm-column(2);
-          max-height: 100px;
+          // max-height: 100px;
           max-width: 100px;
         }
 
@@ -99,15 +113,12 @@ header, footer {
           text-align: right;
           .glyphicon {
             font-size: 70px;
-            padding-top: 12px;
+            padding-top: 25px;
           }
         }
       }
     }
   }
-
-}
-
 
 
 section {

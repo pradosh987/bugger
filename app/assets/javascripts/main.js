@@ -51,7 +51,7 @@ bugger.controller("interfaceController", function($scope) {
       title: "A product title goes here",
       sku_id: "TSHEFE99ZCGDK5ZJ",
       image_url: "http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg",
-      passed: false,
+      passed: true,
       errors: [
         {
           field: "A Feidl title",
