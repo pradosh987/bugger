@@ -1,7 +1,7 @@
 class InterfaceController < ApplicationController
 
   def index
-    
+    render
   end
 
   def create_bugger_job
