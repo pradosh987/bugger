@@ -23,6 +23,7 @@
 //= require angular-sanitize.min
 //= require angular-touch.min
 //= require twitter/bootstrap
-
+//= require jquery.ui.widget
+//= require jquery.fileupload
 
 //= require_tree .

@@ -76,14 +76,9 @@
               <h3 class="headline-support wow fadeInDown">Bugger</h3>
               <h1 class="headline wow fadeInDown" data-wow-delay="0.1s">INSPIRE. ERROR. REPEAT. </h1>
 
-              <!-- <div class="when_where wow fadeIn" data-wow-delay="0.4s">
-                  <p class="event_when">August 21st - 22nd 2016</p>
-                  <p class="event_where">Stockholm, Sweden</p>
-              </div> -->
-
-              <form name="bugger-file-uploader" class="bugger-file-uploader">
+              <form name="bugger-file-uploader" class="bugger-file-uploader" action="create_bugger_job" enctype="multipart/form-data" method="post">
                 <fieldset class="form-group bugger-form-group">
-                  <input type="file" class="form-control-file bubber-file" id="exampleInputFile">
+                  <input type="file" name="input_file" class="form-control-file bubber-file" id="bugger-input-file">
                 </fieldset>
                 <button type="submit" class=" btn btn-default btn-xl wow zoomIn">Submit</button>
               </form>
@@ -91,89 +86,7 @@
           </div>
           <!-- end .container -->
       </header>
-      <!-- end .header -->
-
-
-  
-
-      <!-- 
-       Contact us
-       ====================================== -->
-       <div class="highlight">
-           <div class="container">
-
-               <div class="row">
-                   <div class="col-sm-12">
-                       <div class="bugger-progress">
-                          
-                       </div>
-                   </div>
-               </div>
-               <!--  // end .row -->
-           </div>
-       </div>
-
-      <div class="highlight result-container" ng-repeat="item in results">
-          <div class="container">
-
-              <div class="row">
-                  <div class="col-sm-12">
-                      <div class="contact-box bugger-result">
-                          <div class="result" ng-click="toggle-errors()" >
-                            <div class="overview">
-                              <div class="preview-image">
-                                <img src="http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg" class="img-thumbnail">
-                              </div>
-                              
-                              <div class="title">
-                                <p>{{item.title}}</p>
-                                <small>{{item.sku_id}}</small>
-                              </div>
-
-                              <div class="status">
-                                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" ng-if="item.passed"></span>
-                                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" ng-if="!item.passed"></span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="bugger-errors" ng-if="!item.passed" id="{$index}">
-                            <div class="bs-example">
-                              <table class="table table-hover"> 
-                                <thead> 
-                                  <tr> 
-                                    <th>#</th>
-                                    <th>Field</th> 
-                                    <th>Expected</th> 
-                                    <th>Actual</th>
-                                  </tr> 
-                                </thead> 
-                                <!-- Errors -->
-                                <tbody ng-repeat="error in item.errors"> 
-                                  <tr> 
-                                    <th scope="row">1</th> 
-                                    <td>{{error.field}}</td> 
-                                    <td>{{error.expected}}</td> 
-                                    <td>{{error.actual}}</td> 
-                                  </tr>  
-                                </tbody> 
-                              </table>
-                            </div>
-                          </div>
-                      </div>
-                  </div>
-                  
-              </div>
-              <!--  // end .row -->
-          </div>
-      </div>
-      <!-- //  end .highlight -->
-
-      <!-- 
-       Footer Call to Action
-       ====================================== -->
-
       <footer>
-          <!-- <p> <small class="text-muted">Copyright © 2015. All rights reserved. Made in India</small></p> -->
 
       </footer>
 </div>

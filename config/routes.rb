@@ -49,6 +49,9 @@ Bugger::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'interface#index'
+  post 'create_bugger_job' => 'interface#create_bugger_job'
+  get 'poll_bugger_job' => "interface#poll"
+
 
   # See how all your routes lay out with "rake routes"
 
