@@ -39,7 +39,9 @@ class InterfaceController < ApplicationController
   end
 
   def get_bugger_job_result_json(bugger_job_result)
-    return bugger_job_result.as_json
+    ret = bugger_job_result.as_json
+    ret[:errors] = bugger_job_result.data_errors.as_json
+    return ret
   end
 
   # {
