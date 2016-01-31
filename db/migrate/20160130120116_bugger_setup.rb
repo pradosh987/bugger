@@ -16,12 +16,11 @@ class BuggerSetup < ActiveRecord::Migration
         t.integer :bugger_job_id, :null => false
         t.string :product_ref
         # t.hstore_array :errs
-        t.string :state, :null => false
+        # t.string :state, :null => false
 
         t.timestamps
       end
       add_index :bugger_job_results, :bugger_job_id
-      add_index :bugger_job_results, :state
       add_index :bugger_job_results, :product_ref
 
       create_table :file_attachments do |t|

@@ -51,6 +51,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     commonjs (0.2.7)
+    daemons (1.2.3)
     delayed_job (4.1.1)
       activesupport (>= 3.0, < 5.0)
     delayed_job_active_record (4.1.0)
@@ -161,6 +162,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgres-hstore!
   coffee-rails (~> 3.2.1)
+  daemons
   delayed_job_active_record
   font-awesome-less (~> 4.5.0)
   imgkit
