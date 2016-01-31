@@ -10,10 +10,19 @@ module Bugger
       "Fabric(Flipkart)" => "assert_fabric"
     }
 
+    def self.get_color_parent_element(webpage)
+      webpage.find("#similarBlk li").select{|e| e.children[1].text.strip == "Color:"}.first
+    end
+
+    def self.add_html_error_style(element)
+      element['style'] = "border: 5px solid red"
+      return element
+    end
+
     def self.assert_color(row, webpage, res, excel_key)
       # #similarBlk > div > ul > li:nth-child(4) > span.greyText
       expected_color = row[excel_key]
-      parent = webpage.find("#similarBlk li").select{|e| e.children[1].text.strip == "Color:"}.first
+      parent = self.get_color_parent_element(webpage)
       if parent.blank?
         res.push_error(key: excel_key, type: BuggerJobResult::ERROR_TYPE_MISSING)
         return
@@ -36,6 +45,7 @@ module Bugger
       actual_value = parent.children[3].text
       is_equal = (actual_value == expected_value)
       if !is_equal
+        self.add_html_error_style(parent)
         res.push_error(key: excel_key, type: BuggerJobResult::ERROR_TYPE_MISMATCH, expected_value: expected_value, actual_value: actual_value)
         return
       end
@@ -51,6 +61,7 @@ module Bugger
       end
       is_present = parent.children.collect{|e| e.text.strip}.include?(expected_value.to_s)
       if !is_present
+        self.add_html_error_style(parent)
         res.push_error(key: excel_key, type: BuggerJobResult::ERROR_TYPE_MISSING)
         return
       end
@@ -89,7 +100,7 @@ module Bugger
         link = Bugger::Snapdeal.get_product_link(row)
         break if link.blank?
         wp = Bugger::Webpage.new(link)
-        bugger_res = BuggerJobResult.new({:bugger_job_id => @bugger_job_id, :state =>"test", :product_ref => Bugger::Snapdeal.get_product_ref(row)}, {:without_protection => true})
+        bugger_res = BuggerJobResult.new({:bugger_job_id => @bugger_job_id, :product_ref => Bugger::Snapdeal.get_product_ref(row)}, {:without_protection => true})
         res = Bugger::Snapdeal.assert_row(row, wp, bugger_res)
         res_array.push(res)
         break
