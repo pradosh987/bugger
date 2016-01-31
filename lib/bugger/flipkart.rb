@@ -64,15 +64,27 @@ module Bugger
       end
     end
 
-    def self.assert_product_specs
-      fk_prod_specs = self.find("div.productSpecs")
-      all_tds = fk_prod_specs.xpath(%{.//td[@class='specsValue']})
-      puts "all_tds ==> #{all_tds}"
+    def self.assert_product_specs(row, webpage, res)
+      # "Sleeve", "Number of Contents in Sales Package", "Fabric", "Type", "Fit", "Pattern", "Ideal For", "Occasion", "Style Code"
+      fk_prod_specs = webpage.find("div.productSpecs")
+      keys = fk_prod_specs.css("tr td.specsKey")
+      values = fk_prod_specs.css("tr td.specsValue").collect{|td| td.text.strip}
 
-      values = all_tds.collect do |td|
-        td.text.strip
+      keys.each_with_index do |key, index|
+        expected_value = row[key]
+        actual_value = values[index]
+        if expected_value.present? && expected_value != actual_value
+          res.push_error(key: key, type: BuggerJobResult::ERROR_TYPE_MISMATCH, expected_value: expected_value, actual_value: actual_value)
+        end
       end
-      puts "values ==> #{values}"
+
+      # all_tds = fk_prod_specs.xpath(%{.//td[@class='specsValue']})
+      # puts "all_tds ==> #{all_tds}"
+
+      # values = all_tds.collect do |td|
+      #   td.text.strip
+      # end
+      # puts "values ==> #{values}"
     end
 
     def self.assert_product_sizes(row, webpage, res)
@@ -110,7 +122,7 @@ module Bugger
       assert_key_features(row, webpage, res)
       assert_description_text(row, webpage, res)
 
-      # assert_product_specs(row, webpage, res)
+      assert_product_specs(row, webpage, res)
       return res
     end
 
@@ -118,6 +130,30 @@ module Bugger
     def self.get_escaped_text(text)
       escaped = "'#{text.split("'").join("', \"'\", '")}', ''"
       return escaped
+    end
+
+    def self.run_test
+      @filepath = './C_Tops_muqqvoa79pvme6qm_2801-174401_REQEFE7J0LAMV.xls'
+      @sheet_name = "t_shirt"
+      @bugger_job_id = 123
+
+      # Queue a delayed job
+
+      # This will most probably be inside custom delayed job
+      xl_file = Bugger::XlExtractor.new(@filepath, @sheet_name, ROW_HEADER, ROW_DATA_START)
+
+      res_array = []
+      xl_file.each do |row|
+        puts row
+        link = Bugger::Flipkart.get_product_link(row)
+        break if link.blank?
+        wp = Bugger::Webpage.new(link)
+        bugger_res = BuggerJobResult.new({:bugger_job_id => @bugger_job_id, :product_ref => Bugger::Snapdeal.get_product_ref(row)}, {:without_protection => true})
+        res = Bugger::Flipkart.assert_fk_row(row, wp, bugger_res)
+        res_array.push(res)
+        #break
+      end
+      puts res_array.inspect
     end
     
   end

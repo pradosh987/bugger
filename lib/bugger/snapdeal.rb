@@ -30,6 +30,7 @@ module Bugger
       actual_value = parent.children[3].text
       is_equal = (actual_value == expected_color)
       if !is_equal
+        self.add_html_error_style(parent)
         res.push_error(key: excel_key, type: BuggerJobResult::ERROR_TYPE_MISMATCH, expected_value: expected_color, actual_value: actual_value)
         return
       end

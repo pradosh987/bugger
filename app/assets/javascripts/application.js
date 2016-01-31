@@ -25,5 +25,5 @@
 //= require twitter/bootstrap
 //= require jquery.ui.widget
 //= require jquery.fileupload
-
+//= require underscore-min
 //= require_tree .
