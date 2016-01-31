@@ -63,7 +63,7 @@ module Bugger
       is_present = parent.children.collect{|e| e.text.strip}.include?(expected_value.to_s)
       if !is_present
         self.add_html_error_style(parent)
-        res.push_error(key: excel_key, type: BuggerJobResult::ERROR_TYPE_MISSING)
+        res.push_error(key: excel_key, type: BuggerJobResult::ERROR_TYPE_MISSING, :expected_value => expected_value.to_s)
         return
       end
     end
@@ -97,16 +97,23 @@ module Bugger
 
       res_array = []
       xl_file.each do |row|
-        puts row
+        #puts row
         link = Bugger::Snapdeal.get_product_link(row)
         break if link.blank?
         wp = Bugger::Webpage.new(link)
         bugger_res = BuggerJobResult.new({:bugger_job_id => @bugger_job_id, :product_ref => Bugger::Snapdeal.get_product_ref(row)}, {:without_protection => true})
         res = Bugger::Snapdeal.assert_row(row, wp, bugger_res)
         res_array.push(res)
-        break
+
+        #puts res.data_errors.inspect
+        res.data_errors.each do |err|
+          puts "Product_ref: #{res.product_ref}, Key: #{err.key}, type: #{err.type}, expected_value: #{err.expected_value}, actual_value: #{err.actual_value}"
+        end
+        puts "Product_ref: #{res.product_ref} matched" if res.data_errors.blank?
+        #break
       end
       puts res_array.inspect
+      #binding.pry
     end
 
   end
