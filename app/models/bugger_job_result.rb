@@ -7,6 +7,9 @@ class BuggerJobResult < ActiveRecord::Base
 
   ERROR_TYPE_MISSING = "missing"
   ERROR_TYPE_MISMATCH = "mismatch"
+
+  include PropertiesMixin
+  with_hstore_properties([:product_image_url, :product_title, :product_page_url])
   
   # Example Hash 
   # {
@@ -22,7 +25,7 @@ class BuggerJobResult < ActiveRecord::Base
       expected_value: expected_value,
       actual_value: actual_value
     }
-    
+
     self.data_errors.new(err_hash, {:without_protection => true})
   end
 end

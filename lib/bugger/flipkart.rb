@@ -12,6 +12,14 @@ module Bugger
       return row["Flipkart Serial Number"]
     end
 
+    def self.get_product_image_url(row)
+      return row["Main Image URL"]
+    end
+
+    def self.get_product_title(webpage)
+      return webpage.find(".title-wrap h1.title").text
+    end
+
     def self.assert_key_specs(row, webpage, res)
       # "Key Spec 1"=>"Brand-Wolfpack", 
       # "Key Spec 2"=>"Ideal For-Men's", 

@@ -13,6 +13,9 @@ class InterfaceController < ApplicationController
       filepath = bjob.file_attachment.file.path
       sheet_name = "t_shirt"
       @dj = Delayed::Job.enqueue(VerifyProductDetailsJob.new(bjob.id, filepath, sheet_name))
+      
+      bjob.delayed_job_id = @dj.id
+      bjob.save!
     end
 
     render "show_results"
@@ -39,7 +42,9 @@ class InterfaceController < ApplicationController
   end
 
   def get_bugger_job_result_json(bugger_job_result)
-    return bugger_job_result.as_json
+    ret = bugger_job_result.as_json(:methods => [:product_image_url, :product_title, :product_page_url])
+    ret[:errors] = bugger_job_result.data_errors.as_json
+    return ret
   end
 
   # {
