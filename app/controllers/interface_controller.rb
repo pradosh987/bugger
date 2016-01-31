@@ -13,6 +13,9 @@ class InterfaceController < ApplicationController
       filepath = bjob.file_attachment.file.path
       sheet_name = "t_shirt"
       @dj = Delayed::Job.enqueue(VerifyProductDetailsJob.new(bjob.id, filepath, sheet_name))
+      
+      bjob.delayed_job_id = @dj.id
+      bjob.save!
     end
 
     render "show_results"

@@ -21,6 +21,8 @@ class VerifyProductDetailsJob
       res = Bugger::Flipkart.assert_fk_row(row, wp, bugger_res)
       res.save!
     end
+
+    bjob = BuggerJob.find(@bugger_job_id).complete!
   end
 
   def queue_name
