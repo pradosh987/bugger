@@ -3,8 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+@import "twitter/bootstrap";
 @import "variable_overrides";
-@import "bootstrap";
 
 /*  ------- HEADER --------  */
 
@@ -12,11 +12,15 @@ header, footer {
   height: 200px;
 }
 
+.above-the-fold {
+  background: #0E9C5C;
+}
+
 /*  ------- HEADER --------  */
 
 
 .bugger-content {
-  @extend .container;
+  .container;
 
   .creative-heading {
     margin: 20px;
@@ -24,7 +28,7 @@ header, footer {
   }
 
   .input-container {
-    @extend .bugger-container;
+    .bugger-container;
     
     padding: 20px 60px;
     border: 3px solid rgba(167, 248, 159, 0.3);
@@ -41,7 +45,7 @@ header, footer {
   }
 
   .bugger-progress {
-    @extend .bugger-container;
+    .bugger-container;
     
     .content {
       margin: 50px 0px;
@@ -58,12 +62,56 @@ header, footer {
   
   }
 
+  .bugger-result {
+    .container;
+
+
+    .result {
+      margin: 20px 10px;
+
+      .overview {
+        .row;
+        padding: 5px;
+        border: 3px solid #dddddd;
+        border-radius: 5px;
+
+        .preview-image {
+          .make-sm-column(2);
+          max-height: 100px;
+          max-width: 100px;
+        }
+
+        .title {
+          .make-sm-column(8);
+
+          p {
+            font-size: 26px;
+          }
+
+          small {
+            .label;
+            .label-warning;
+          }
+        }
+
+        .status {
+          .make-sm-column(2);
+          text-align: right;
+          .glyphicon {
+            font-size: 70px;
+            padding-top: 12px;
+          }
+        }
+      }
+    }
+  }
+
 }
 
 
 
 section {
-  @extend .container;
+  .container;
 }
 
 /*  --------- Forms  --------------- */
@@ -83,8 +131,8 @@ section {
 }
 
 .bugger-button {
-  @extend .btn;
-  @extend .btn-primary;
+  .btn;
+  .btn-primary;
 }
 
 .bugger-container {

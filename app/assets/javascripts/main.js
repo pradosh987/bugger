@@ -32,6 +32,48 @@ bugger.controller("interfaceController", function($scope) {
     console.log("hide spinner");
   }
 
+
+  $scope.results = [
+    {
+      title: "A product title goes here",
+      sku_id: "TSHEFE99ZCGDK5ZJ",
+      image_url: "http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg",
+      passed: false,
+      errors: [
+        {
+          field: "A Feidl title",
+          expected: "An expected data",
+          actual: "Actual data found"
+        }
+      ]
+    },
+    {
+      title: "A product title goes here",
+      sku_id: "TSHEFE99ZCGDK5ZJ",
+      image_url: "http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg",
+      passed: false,
+      errors: [
+        {
+          field: "A Feidl title",
+          expected: "An expected data",
+          actual: "Actual data found"
+        }
+      ]
+    },
+    {
+      title: "A product title goes here",
+      sku_id: "TSHEFE99ZCGDK5ZJ",
+      image_url: "http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg",
+      passed: false,
+      errors: [
+        {
+          field: "A Feidl title",
+          expected: "An expected data",
+          actual: "Actual data found"
+        }
+      ]
+    }
+  ]
   
 
 });

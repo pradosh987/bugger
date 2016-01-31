@@ -10,8 +10,7 @@ gem 'pg'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  # gem 'coffee-rails', '~> 3.2.1'
+  gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -41,5 +40,9 @@ gem 'paperclip'
 gem 'activerecord-postgres-hstore', :git => 'https://github.com/vacationlabs/activerecord-postgres-hstore.git'
 gem 'state_machine'
 gem 'nokogiri'
-gem 'font-awesome-sass', '~> 4.5.0'
-gem 'bootstrap', '~> 4.0.0.alpha3'
+# gem 'font-awesome-sass', '~> 4.5.0'
+# gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'less-rails-bootstrap'
+gem "therubyracer"
+# gem 'bootstrap-sass', '~> 3.3.6'
+# gem 'sass-ralis', '>= 3.2'

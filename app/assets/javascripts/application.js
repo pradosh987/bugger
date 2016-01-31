@@ -22,6 +22,6 @@
 //= require angular-route.min.js
 //= require angular-sanitize.min
 //= require angular-touch.min
-//= require bootstrap.js
+//= require twitter/bootstrap
 
 //= require_tree .

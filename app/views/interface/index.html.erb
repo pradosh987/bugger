@@ -1,5 +1,7 @@
 <div ng-controller="interfaceController">
   <div class="bugger-content">
+    <div class="above-the-fold">
+      
     
     <h1 class="creative-heading">hELLO wORLD!</h1>
 
@@ -22,8 +24,35 @@
     <section ng-if="is_processing" class="bugger-progress">
       <div class="content">
         <p>We are processing your request in background, please wait!!!</p>
-        <progress class="progress progress-striped progress-animated" value="{{bugger_job_progress}}" max="{{bugger_job_count}}">{{bugger_job_progress}}%</progress>
+
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{bugger_job_progress}}" aria-valuemin="0" aria-valuemax="{{bugger_job_count}}">
+            <span class="sr-only">{{bugger_job_progress }}% Complete</span>
+          </div>
+        </div>
+
         <div class="progress-overview"><span class="counter">{{bugger_job_progress}}</span> processed out of <span class="counter">{{bugger_job_count}}</span></div>
+      </div>
+    </section>
+    </div>
+
+    <section class="bugger-result">
+      <div class="result" ng-repeat="item in results">
+        <div class="overview">
+          <div class="preview-image">
+            <img src="http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg" class="img-thumbnail">
+          </div>
+          
+          <div class="title">
+            <p>{{item.title}}</p>
+            <small>{{item.sku_id}}</small>
+          </div>
+
+          <div class="status">
+            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" ng-if="item.passed"></span>
+            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" ng-if="!item.passed"></span>
+          </div>
+        </div>
       </div>
     </section>
 
