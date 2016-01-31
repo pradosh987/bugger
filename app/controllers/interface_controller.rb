@@ -39,7 +39,7 @@ class InterfaceController < ApplicationController
   end
 
   def get_bugger_job_result_json(bugger_job_result)
-    ret = bugger_job_result.as_json
+    ret = bugger_job_result.as_json(:methods => [:product_image_url, :product_title, :product_page_url])
     ret[:errors] = bugger_job_result.data_errors.as_json
     return ret
   end

@@ -15,6 +15,9 @@ class VerifyProductDetailsJob
       bugger_res = BuggerJobResult.new({:bugger_job_id => @bugger_job_id, 
                                         :product_ref => Bugger::Flipkart.get_product_ref(row)}, 
                                         {:without_protection => true})
+      bugger_res.product_image_url = Bugger::Flipkart.get_product_image_url(row) 
+      bugger_res.product_title = Bugger::Flipkart.get_product_title(wp)
+      bugger_res.product_page_url = Bugger::Flipkart.get_product_link(row)
       res = Bugger::Flipkart.assert_fk_row(row, wp, bugger_res)
       res.save!
     end

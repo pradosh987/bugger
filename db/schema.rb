@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160131085158) do
+ActiveRecord::Schema.define(:version => 20160131105025) do
 
   create_table "bugger_job_results", :force => true do |t|
     t.integer  "bugger_job_id", :null => false
     t.string   "product_ref"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.hstore   "properties"
   end
 
   add_index "bugger_job_results", ["bugger_job_id"], :name => "index_bugger_job_results_on_bugger_job_id"
