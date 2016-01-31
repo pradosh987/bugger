@@ -46,3 +46,6 @@ gem 'less-rails-bootstrap'
 gem "therubyracer"
 # gem 'bootstrap-sass', '~> 3.3.6'
 # gem 'sass-ralis', '>= 3.2'
+gem 'spreadsheet'
+gem 'roo'
+gem 'roo-xls'
