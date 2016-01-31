@@ -86,30 +86,25 @@ bugger.controller("resultController", ["$scope", "$interval","$q", "$http", func
 
   deferred = $q.defer();
 
-  // TODO: inject id 
   $scope.poll_id = $("#bugger_job_id").val();
-
 
   var poll_prom = $interval(function() {
     $http.get("/bugger_jobs/" + $scope.poll_id + "/get_poll_results")
     .success(function(data) {
       update_data(data.bugger_job);
-      // if(!_.isEmpty(data.dj_poll_result) && data.dj_poll_result.state == "completed") {
-      //   $scope.verifying_dns = false;
-      //   $scope.dns_verified = (data.dj_poll_result.results.verified == "true" || data.dj_poll_result.results.verified == true) ? true : false;
-      //   deferred.resolve(data);
-      //   $scope.stop_verify_dns_poll();
-      // }
     });
-  }, 5000, 4);
+  }, 5000, 40);
 
   function update_data(data){
     console.log(data);
-    $scope.results = data.results;
+    $scope.results = data.results.reverse();
 
-    if(data.state == "complete"){
+    if(data.state == "completed"){
       is_processing = false;
       stop_poll();
+      stop_spinner();
+
+      $(".progress-headline").text("File successfully processed.")
     } else {
 
     }
