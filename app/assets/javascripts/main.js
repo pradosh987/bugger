@@ -110,13 +110,12 @@ bugger.controller("resultController", ["$scope", "$interval","$q", "$http", func
     }
   
     // Injecting results
-    if($scope.results.length > 0) {
-      $scope.results[0]["errors"] = errors;
-      if($scope.results.length > 6) {
-      $scope.results[5]["errors"] = errors;
-      }
-    }
-
+    // if($scope.results.length > 0) {
+    //   $scope.results[0]["errors"] = errors;
+    //   if($scope.results.length > 6) {
+    //   $scope.results[5]["errors"] = errors;
+    //   }
+    // }
   }
 
   function complete_poll() {
