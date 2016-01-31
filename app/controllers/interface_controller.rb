@@ -44,5 +44,19 @@ class InterfaceController < ApplicationController
   #     }
   #   ]
   # }
+  def create_bugger_job
+    ActiveRecord::Base.transaction do
+      bjob = BuggerJob.new(params[:bugger_job], {:without_protection => true})
+      bjob.file_attachment = FileAttachment.new({:file => params[:input_file]}, {:without_protection => true})
+      bjob.save!
+      puts "result => #{bjob.errors.inspect}"
+      
+    end
+    render "show_results"
+  end
+
+  def poll
+
+  end
 
 end
