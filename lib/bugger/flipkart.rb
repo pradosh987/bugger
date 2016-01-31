@@ -1,6 +1,9 @@
 module Bugger
   class Flipkart
 
+    ROW_HEADER = 1
+    ROW_DATA_START = 5
+
     def self.get_product_link(row)
       return row["Flipkart Product Link"]
     end
