@@ -68,8 +68,8 @@ module Bugger
       key = "Size"
       expected_size = row[key]
 
-      size_css_selector = "div.multiSelectionWidget-selectors-wrap .selector-attr-size.current > div[data-selectorvalue=#{expected_size}]"
-      fk_size = fk_size_container.find(file_css_selector)
+      size_css_selector = "div.multiSelectionWidget-selectors-wrap div[data-selectorvalue=#{expected_size}]"
+      fk_size = fk_size_container.find(size_css_selector)
       if fk_size.blank?
         res.push_error(key: key, type: BuggerJobResult::ERROR_TYPE_MISSING)
       end
