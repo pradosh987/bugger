@@ -11,13 +11,16 @@
 /*  ------- HEADER --------  */
 
 header, footer {
-  height: 500px;
+  height: 700px;
 }
 
 .above-the-fold {
   background: #0E9C5C;
 }
 
+.headline-support {
+  text-transform: uppercase;
+}
 /*  ------- HEADER --------  */
 
 
@@ -99,12 +102,18 @@ header, footer {
           .make-sm-column(2);
           // max-height: 100px;
           max-width: 100px;
+
+          img {
+            padding: 0px;
+          }
         }
 
         .title {
           .make-sm-column(8);
-
-          p {
+          h3 {
+            margin-top: 0px;
+          }
+          a {
             font-size: 26px;
           }
 
@@ -120,6 +129,14 @@ header, footer {
           .glyphicon {
             font-size: 70px;
             padding-top: 25px;
+          }
+
+          .glyphicon-remove-circle {
+            color: red;
+          }
+
+          .glyphicon-ok-circle {
+            color: green;
           }
         }
       }

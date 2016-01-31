@@ -2,66 +2,53 @@
 
 var bugger = angular.module("bugger", []);
 
-bugger.controller("interfaceController", function($scope) {
-
-
-  function show_main_spinner() {
-    console.log("trigger spinner");
-  }
-
-  function hide_spinner() {
-    console.log("hide spinner");
-  }
-
-
-  
-  
+bugger.controller("interfaceController", function($scope) {  
 
 });
 
-bugger.controller("resultController", ["$scope", "$interval", function($scope, $interval  ) {
+bugger.controller("resultController", ["$scope", "$interval","$q", "$http", function($scope, $interval, $q, $http ) {
 
-  $scope.results = [
-    {
-      title: "A product title goes here",
-      sku_id: "TSHEFE99ZCGDK5ZJ",
-      image_url: "http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg",
-      passed: false,
-      errors: [
-        {
-          field: "A Feidl title",
-          expected: "An expected data",
-          actual: "Actual data found"
-        }
-      ]
-    },
-    {
-      title: "A product title goes here",
-      sku_id: "TSHEFE99ZCGDK5ZJ",
-      image_url: "http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg",
-      passed: true,
-      errors: [
-        {
-          field: "A Feidl title",
-          expected: "An expected data",
-          actual: "Actual data found"
-        }
-      ]
-    },
-    {
-      title: "A product title goes here",
-      sku_id: "TSHEFE99ZCGDK5ZJ",
-      image_url: "http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg",
-      passed: false,
-      errors: [
-        {
-          field: "A Feidl title",
-          expected: "An expected data",
-          actual: "Actual data found"
-        }
-      ]
-    }
-  ]
+  // $scope.results = [
+  //   {
+  //     title: "A product title goes here",
+  //     product_ref: "TSHEFE99ZCGDK5ZJ",
+  //     main_image: "http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg",
+  //     passed: false,
+  //     errors: [
+  //       {
+  //         field: "A Feidl title",
+  //         expected: "An expected data",
+  //         actual: "Actual data found"
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     title: "A product title goes here",
+  //     product_ref: "TSHEFE99ZCGDK5ZJ",
+  //     main_image: "http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg",
+  //     passed: true,
+  //     errors: [
+  //       {
+  //         field: "A Feidl title",
+  //         expected: "An expected data",
+  //         actual: "Actual data found"
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     title: "A product title goes here",
+  //     product_ref: "TSHEFE99ZCGDK5ZJ",
+  //     main_image: "http://btesimages.s3.amazonaws.com/Wolfpack/wp_dontpassthebuck_orange_1.jpg",
+  //     passed: false,
+  //     errors: [
+  //       {
+  //         field: "A Feidl title",
+  //         expected: "An expected data",
+  //         actual: "Actual data found"
+  //       }
+  //     ]
+  //   }
+  // ]
 
   $scope.bugger_job_progress = 0;
 
@@ -69,19 +56,44 @@ bugger.controller("resultController", ["$scope", "$interval", function($scope, $
 
   $scope.is_processing = true;
 
-  var polling_url = "poll?id="
+  $scope.all_passed = false;
+
+  var polling_url = "/poll?id="
+
+  var errors = [
+    {
+      key: "A Feidl title",
+      type: "Mismatch"
+    },
+    {
+      key: "A Feidl title",
+      type: "Missing",
+      expected_value: "An expected data",
+      actual_value: "Actual data found"
+    },
+    {
+      key: "A Feidl title",
+      type: "Mismatch"
+    },
+    {
+      key: "A Feidl title",
+      type: "Missing",
+      expected_value: "An expected data",
+      actual_value: "Actual data found"
+    }
+  ]
 
 
   deferred = $q.defer();
 
   // TODO: inject id 
-  $scope.poll_id = 0;
+  $scope.poll_id = $("#bugger_job_id").val();
 
 
   var poll_prom = $interval(function() {
-    $http.get($scope.polling_url + $scope.poll_id)
+    $http.get("/bugger_jobs/" + $scope.poll_id + "/get_poll_results")
     .success(function(data) {
-      update_data(data.data);
+      update_data(data.bugger_job);
       // if(!_.isEmpty(data.dj_poll_result) && data.dj_poll_result.state == "completed") {
       //   $scope.verifying_dns = false;
       //   $scope.dns_verified = (data.dj_poll_result.results.verified == "true" || data.dj_poll_result.results.verified == true) ? true : false;
@@ -89,9 +101,26 @@ bugger.controller("resultController", ["$scope", "$interval", function($scope, $
       //   $scope.stop_verify_dns_poll();
       // }
     });
-  }, 2000, 30);
+  }, 5000, 4);
 
   function update_data(data){
+    console.log(data);
+    $scope.results = data.results;
+
+    if(data.state == "complete"){
+      is_processing = false;
+      stop_poll();
+    } else {
+
+    }
+  
+    // Injecting results
+    if($scope.results.length > 0) {
+      $scope.results[0]["errors"] = errors;
+      if($scope.results.length > 6) {
+      $scope.results[5]["errors"] = errors;
+      }
+    }
 
   }
 
@@ -103,6 +132,7 @@ bugger.controller("resultController", ["$scope", "$interval", function($scope, $
   }
 
   function stop_poll() {
+
     if (!_.isEmpty(poll_prom)) {
       $interval.cancel(poll_prom);
       poll_prom = null;

@@ -58,10 +58,6 @@
 
   </div> -->
 
-
-      <!--Preloader div-->
-      <div class="preloader"></div>
-
       
 
       <header id="top" class="header">
@@ -74,19 +70,24 @@
               </div> -->
 
               <h3 class="headline-support wow fadeInDown">Bugger</h3>
-              <h1 class="headline wow fadeInDown" data-wow-delay="0.1s">INSPIRE. ERROR. REPEAT. </h1>
+              <h1 class="headline wow fadeInDown" data-wow-delay="0.1s">Catalog error spotter</h1>
 
               <form name="bugger-file-uploader" class="bugger-file-uploader" action="create_bugger_job" enctype="multipart/form-data" method="post">
                 <fieldset class="form-group bugger-form-group">
-                  <input type="file" name="input_file" class="form-control-file bubber-file" id="bugger-input-file">
+                  <input type="file" title="" name="input_file" class="form-control-file bubber-file" id="bugger-input-file">
+                </fieldset>
+                <fieldset>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="marketplace" id="marketplace" value="flipkart" checked>
+                      Flipkart
+                    </label>
+                    <label>
+                      <input type="radio" name="marketplace" id="marketplace" value="snapdeal"  >
+                      SnapDeal
+                    </label>
+                  </div>
                 </fieldset>
                 <button type="submit" class=" btn btn-default btn-xl wow zoomIn">Submit</button>
-              </form>
-
-          </div>
-          <!-- end .container -->
-      </header>
-      <footer>
-
-      </footer>
+              </form> 
 </div>
