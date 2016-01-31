@@ -62,24 +62,24 @@ bugger.controller("resultController", ["$scope", "$interval","$q", "$http", func
 
   var errors = [
     {
-      key: "A Feidl title",
-      type: "Mismatch"
-    },
-    {
-      key: "A Feidl title",
-      type: "Missing",
+      key: "A Field title",
+      type: "Mismatch",
       expected_value: "An expected data",
       actual_value: "Actual data found"
     },
     {
-      key: "A Feidl title",
-      type: "Mismatch"
+      key: "A Field title",
+      type: "Missing"
     },
     {
-      key: "A Feidl title",
-      type: "Missing",
+      key: "A Field title",
+      type: "Mismatch",
       expected_value: "An expected data",
       actual_value: "Actual data found"
+    },
+    {
+      key: "A Field title",
+      type: "Missing"
     }
   ]
 
@@ -110,12 +110,12 @@ bugger.controller("resultController", ["$scope", "$interval","$q", "$http", func
     }
   
     // Injecting results
-    // if($scope.results.length > 0) {
-    //   $scope.results[0]["errors"] = errors;
-    //   if($scope.results.length > 6) {
-    //   $scope.results[5]["errors"] = errors;
-    //   }
-    // }
+    if($scope.results.length > 0) {
+      $scope.results[0]["errors"] = errors;
+      if($scope.results.length > 6) {
+      $scope.results[5]["errors"] = errors;
+      }
+    }
   }
 
   function complete_poll() {
