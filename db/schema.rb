@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160130123127) do
+ActiveRecord::Schema.define(:version => 20160131085158) do
 
   create_table "bugger_job_results", :force => true do |t|
     t.integer  "bugger_job_id", :null => false
@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(:version => 20160130123127) do
   end
 
   add_index "bugger_jobs", ["state"], :name => "index_bugger_jobs_on_state"
+
+  create_table "data_errors", :force => true do |t|
+    t.integer  "bugger_job_result_id", :null => false
+    t.string   "key",                  :null => false
+    t.string   "type",                 :null => false
+    t.string   "expected_value"
+    t.string   "actual_value"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "data_errors", ["bugger_job_result_id"], :name => "index_data_errors_on_bugger_job_result_id"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
