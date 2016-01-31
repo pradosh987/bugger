@@ -15,15 +15,14 @@ ActiveRecord::Schema.define(:version => 20160130123127) do
 
   create_table "bugger_job_results", :force => true do |t|
     t.integer  "bugger_job_id", :null => false
-    t.integer  "product_id"
-    t.hstore   "errors"
+    t.string   "product_ref"
     t.string   "state",         :null => false
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
   add_index "bugger_job_results", ["bugger_job_id"], :name => "index_bugger_job_results_on_bugger_job_id"
-  add_index "bugger_job_results", ["product_id"], :name => "index_bugger_job_results_on_product_id"
+  add_index "bugger_job_results", ["product_ref"], :name => "index_bugger_job_results_on_product_ref"
   add_index "bugger_job_results", ["state"], :name => "index_bugger_job_results_on_state"
 
   create_table "bugger_jobs", :force => true do |t|

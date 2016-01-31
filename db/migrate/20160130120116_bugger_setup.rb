@@ -14,15 +14,15 @@ class BuggerSetup < ActiveRecord::Migration
 
       create_table :bugger_job_results do |t|
         t.integer :bugger_job_id, :null => false
-        t.integer :product_id
-        t.hstore :errors
+        t.string :product_ref
+        # t.hstore_array :errs
         t.string :state, :null => false
 
         t.timestamps
       end
       add_index :bugger_job_results, :bugger_job_id
       add_index :bugger_job_results, :state
-      add_index :bugger_job_results, :product_id
+      add_index :bugger_job_results, :product_ref
 
       create_table :file_attachments do |t|
         t.integer :row_id
