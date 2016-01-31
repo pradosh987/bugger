@@ -60,6 +60,7 @@ GEM
       sass (>= 3.2)
     hike (1.2.3)
     i18n (0.7.0)
+    imgkit (1.6.1)
     journey (1.0.4)
     jquery-rails (3.1.4)
       railties (>= 3.0, < 5.0)
@@ -72,6 +73,10 @@ GEM
     mimemagic (0.3.0)
     mini_portile2 (2.0.0)
     multi_json (1.11.2)
+    nikkou (0.0.4)
+      activesupport
+      nokogiri
+      tzinfo
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     paperclip (4.3.3)
@@ -139,6 +144,7 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    wicked_pdf (1.0.4)
 
 PLATFORMS
   ruby
@@ -148,7 +154,9 @@ DEPENDENCIES
   bootstrap (~> 4.0.0.alpha3)
   delayed_job_active_record
   font-awesome-sass (~> 4.5.0)
+  imgkit
   jquery-rails
+  nikkou
   nokogiri
   paperclip
   pg
@@ -159,3 +167,4 @@ DEPENDENCIES
   spreadsheet
   state_machine
   uglifier (>= 1.0.3)
+  wicked_pdf

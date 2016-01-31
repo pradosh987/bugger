@@ -1,5 +1,9 @@
 module Bugger
-  class Flipkart < Bugger::Mapper
+  class Flipkart
+
+    def self.assert_key_specs
+      
+    end
     
   end
 end
