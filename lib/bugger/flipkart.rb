@@ -20,11 +20,12 @@ module Bugger
       return webpage.find(".title-wrap h1.title").text
     end
 
+    # Example key specs
+    # "Key Spec 1"=>"Brand-Wolfpack", 
+    # "Key Spec 2"=>"Ideal For-Men's", 
+    # "Key Spec 3"=>"Material-Cotton", 
+    # "Key Spec 4"=>"Color-Dark Blue", 
     def self.assert_key_specs(row, webpage, res)
-      # "Key Spec 1"=>"Brand-Wolfpack", 
-      # "Key Spec 2"=>"Ideal For-Men's", 
-      # "Key Spec 3"=>"Material-Cotton", 
-      # "Key Spec 4"=>"Color-Dark Blue", 
       key_specs_webpage_data = webpage.find('ul.key-specifications')
       idx = 1
       while row.has_key?("Key Spec #{idx}")

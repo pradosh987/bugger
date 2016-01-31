@@ -47,32 +47,4 @@ class InterfaceController < ApplicationController
     return ret
   end
 
-  # {
-  #   bugger_job: {
-  #     :state => "processing",
-  #     :delayed_job_id => "123",
-  #     :completed_at => "sometime",
-  #     :results => [
-  #       {
-  #         product_ref: "flipkart ref number"
-  #         product_image: "img url",
-  #         product_title: "Some title",
-  #         product_page_url: "flipkart page url"
-  #         errors: [
-  #           {
-  #             key: "Some key",
-  #             type: "mismatch",
-  #             expected_value: "abc",
-  #             actual_value: "xyz"
-  #           },
-  #           {
-  #             key: "Some key",
-  #             type: "missing"
-  #           }
-  #         ]
-  #       }
-  #     ]
-  #   } 
-  # }
-
 end
