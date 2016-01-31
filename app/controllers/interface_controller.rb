@@ -18,47 +18,29 @@ class InterfaceController < ApplicationController
     render "show_results"
   end
 
-  # def assert_fk_data
-  #   # Save the incoming file
-  #   # Create a bugger job entry
-  #   @filepath = './C_Tops_muqqvoa79pvme6qm_2801-174401_REQEFE7J0LAMV.xls'
-  #   @sheet_name = "t_shirt"
-  #   @bugger_job_id = 123
+  def get_poll_results
+    bugger_job = BuggerJob.where(:id => params[:bugger_job_id]).first
+    raise "No job present with ID #{params[:bugger_job_id]}" if bugger_job.blank?
+    job_results = BuggerJobResult.where(:bugger_job_id => params[:bugger_job_id])
 
-  #   # Queue a delayed job
-  #   dj = Delayed::Job.enqueue(VerifyProductDetailsJob.new(@bugger_job_id, @filepath, @sheet_name))
-    
-  #   # This will most probably be inside custom delayed job
-    
-  #   # xl_file = Bugger::XlExtractor.new(@filepath, @sheet_name)
+    ret = poll_result_json(bugger_job, job_results)
+    render :json => ret 
+  end
 
-  #   # res_array = []
-  #   # xl_file.each do |row|
-  #   #   wp = Bugger::Webpage.new(Bugger::Flipkart.get_product_link(row))
-  #   #   bugger_res = BuggerJobResult.new({:bugger_job_id => @bugger_job_id, :state =>"test", :product_ref => Bugger::Flipkart.get_product_ref(row)}, {:without_protection => true}) 
-  #   #  res = Bugger::Flipkart.assert_fk_row(row, wp, bugger_res)
-  #   #   res_array.push(res)
-  #   # end
-  # end
+  private
+  def poll_result_json(bugger_job, bugger_job_results)
+    ret = {:bugger_job => bugger_job.as_json(:only => [:state, :delayed_job_id, :completed_at])}
+    ret[:bugger_job][:results] = get_bugger_job_results_json(bugger_job_results)
+    return ret
+  end
 
-  # {
-  #   product_ref: "flipkart ref number"
-  #   main_image: "img url",
-  #   title: "Some title",
-  #   page_url: "flipkart page url"
-  #   errors: [
-  #     {
-  #       key: "Some key",
-  #       type: "mismatch",
-  #       expected_value: "abc",
-  #       actual_value: "xyz"
-  #     },
-  #     {
-  #       key: "Some key",
-  #       type: "missing"
-  #     }
-  #   ]
-  # }
+  def get_bugger_job_results_json(bugger_job_results)
+    return bugger_job_results.collect {|jr| get_bugger_job_result_json(jr) }
+  end
+
+  def get_bugger_job_result_json(bugger_job_result)
+    return bugger_job_result.as_json
+  end
 
   # {
   #   bugger_job: {

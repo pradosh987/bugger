@@ -50,7 +50,7 @@ Bugger::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'interface#index'
   post 'create_bugger_job' => 'interface#create_bugger_job'
-  get 'poll_bugger_job' => "interface#poll"
+  get "/bugger_jobs/:bugger_job_id/get_poll_results", :to => "interface#get_poll_results", :as => "get_poll_results"
 
 
   # See how all your routes lay out with "rake routes"
@@ -59,7 +59,7 @@ Bugger::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  get "/", :to => 'bugger#index', :as => "home"
-  post "/upload_product_file", :to => "bugger#create", :as => "file_upload"
+  # get "/", :to => 'bugger#index', :as => "home"
+  # post "/upload_product_file", :to => "bugger#create", :as => "file_upload"
 
 end
